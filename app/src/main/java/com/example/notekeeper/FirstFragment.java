@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,20 @@ public class FirstFragment extends Fragment {
         spinnerCourse.setAdapter(courseInfoArrayAdapter);
 
         readDisplayStateValue();
+
+        EditText editTextNoteTitle = binding.textNoteTitle;
+        EditText editTextNoteText = binding.textNoteText;
+
+        if(!mIsNewNote)
+            displayNote(spinnerCourse,editTextNoteTitle,editTextNoteText);
+    }
+
+    private void displayNote(Spinner spinnerCourse, EditText editTextNoteTitle, EditText editTextNoteText) {
+        List<CourseInfo> courseInfoList = DataManager.getInstance().getCourses();
+        int courseIndex = courseInfoList.indexOf(mNoteInfo.getCourse());
+        spinnerCourse.setSelection(courseIndex);
+        editTextNoteTitle.setText(mNoteInfo.getTitle());
+        editTextNoteText.setText(mNoteInfo.getText());
     }
 
     private void readDisplayStateValue() {
