@@ -1,5 +1,8 @@
 package com.example.notekeeper;
 
+
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,9 @@ import java.util.List;
 
 public class FirstFragment extends Fragment {
 
+    public static final String NOTE_INFO = "com.example.notekeeper.NOTE_INFO";
+    private NoteInfo mNoteInfo;
+    private boolean mIsNewNote;
     private FragmentFirstBinding binding;
 
     @Override
@@ -39,6 +45,14 @@ public class FirstFragment extends Fragment {
                 new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, courseInfoList);
         courseInfoArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCourse.setAdapter(courseInfoArrayAdapter);
+
+        readDisplayStateValue();
+    }
+
+    private void readDisplayStateValue() {
+        Intent intent = getActivity().getIntent();
+        mNoteInfo = intent.getParcelableExtra(NOTE_INFO);
+        mIsNewNote = mNoteInfo == null;
     }
 
     @Override

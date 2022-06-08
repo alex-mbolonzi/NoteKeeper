@@ -39,7 +39,7 @@ public class First2Fragment extends Fragment {
     }
 
     private void initializeDisplayContent() {
-        ListView noteListView = binding.listNote;
+        final ListView noteListView = binding.listNote;
         List<NoteInfo> noteInfoList = DataManager.getInstance().getNotes();
         ArrayAdapter<NoteInfo> noteInfoArrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1, noteInfoList);
@@ -47,6 +47,8 @@ public class First2Fragment extends Fragment {
 
         noteListView.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getActivity(),NoteActivity.class);
+            NoteInfo noteInfo = (NoteInfo) noteListView.getItemAtPosition(position);
+            intent.putExtra(FirstFragment.NOTE_INFO,noteInfo);
             startActivity(intent);
         });
     }
