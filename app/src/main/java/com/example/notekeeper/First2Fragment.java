@@ -1,9 +1,11 @@
 package com.example.notekeeper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -42,6 +44,11 @@ public class First2Fragment extends Fragment {
         ArrayAdapter<NoteInfo> noteInfoArrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1, noteInfoList);
         noteListView.setAdapter(noteInfoArrayAdapter);
+
+        noteListView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(getActivity(),NoteActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
